@@ -215,18 +215,7 @@ class Home_page extends StatelessWidget {
 
   void addToFavorites(String quote) async {
     bool added = await DbHelper.instance.insertData(quote);
-    // if (added) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(
-    //       content: Text('Quote added to favorites'),
-    //     ),
-    //   );
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(
-    //       content: Text('Quote is already in favorites'),
-    //     ),
-    //   );
+
     }
 
 }
