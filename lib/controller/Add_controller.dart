@@ -87,6 +87,10 @@ class SignupController extends GetxController {
   late FsModel userModel = FsModel();
   RxString? value;
   String? image;
+  String productname='';
+  String productdesc='';
+  String productimage='';
+  String productprice='';
 
   void goto() async {
     // FsModel().addUser(user.user);
@@ -99,6 +103,10 @@ class SignupController extends GetxController {
                 description: description.text,
                 image: filepath.toString())
             .toJson());
+    productname = fname.text;
+    productprice = price.text;
+    productdesc = description.text;
+    productimage = filepath.toString();
     fname.clear();
     price.clear();
     description.clear();

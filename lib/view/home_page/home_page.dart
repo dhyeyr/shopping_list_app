@@ -9,6 +9,7 @@ import '../../controller/Add_controller.dart';
 import '../../model/db_helper.dart';
 import '../../model/fs_model.dart';
 import '../../model/login&sign_model.dart';
+import '../cart_page/cart_page.dart';
 
 class Home_page extends StatelessWidget {
   Home_page({super.key});
@@ -23,6 +24,9 @@ class Home_page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("home page"),
+        actions: [IconButton(onPressed: () {
+          Get.to(Homepage());
+        }, icon:Icon(Icons.shopping_cart))],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("product").snapshots(),
@@ -47,8 +51,10 @@ class Home_page extends StatelessWidget {
                     // ),),
                     trailing: IconButton(
                         onPressed: () {
-
-                          addToFavorites(HttpHeaders.fromHeader);
+                          DbHelper helper = DbHelper();
+                          print(fname.text);
+                          helper.insertProduct(controller.productname, controller.productdesc, controller.productimage, controller.productprice);
+                          // addToFavorites(HttpHeaders.fromHeader);
                         },
                         icon: Icon(Icons.add_shopping_cart_outlined)),
                     title: Text(productDetail["name"]),
@@ -197,25 +203,25 @@ class Home_page extends StatelessWidget {
           true, // Set to false if you don't want to dismiss the dialog by tapping outside of it
     );
   }
-  List<String> getAllCategories(List allQuote) {
-    Set<String> categoriesSet = <String>{};
-    for (var quoteModel in allQuote) {
-      categoriesSet.addAll(quoteModel.categories ?? []);
-    }
-    return categoriesSet.toList();
-  }
-
-  List<String> getAllBackgroundImages(List allQuote) {
-    List<String> backgroundImages = [];
-    for (var quoteModel in allQuote) {
-      backgroundImages.addAll(quoteModel.bgImages ?? []);
-    }
-    return backgroundImages;
-  }
-
-  void addToFavorites(String quote) async {
-    bool added = await DbHelper.instance.insertData(quote);
-
-    }
+  // List<String> getAllCategories(List allQuote) {
+  //   Set<String> categoriesSet = <String>{};
+  //   for (var quoteModel in allQuote) {
+  //     categoriesSet.addAll(quoteModel.categories ?? []);
+  //   }
+  //   return categoriesSet.toList();
+  // }
+  //
+  // List<String> getAllBackgroundImages(List allQuote) {
+  //   List<String> backgroundImages = [];
+  //   for (var quoteModel in allQuote) {
+  //     backgroundImages.addAll(quoteModel.bgImages ?? []);
+  //   }
+  //   return backgroundImages;
+  // }
+  //
+  // void addToFavorites(String quote) async {
+  //   bool added = await DbHelper.instance.insertData(quote);
+  //
+  //   }
 
 }
