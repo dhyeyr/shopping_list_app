@@ -42,9 +42,14 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
 
       appBar: AppBar(
+        toolbarHeight: 70.0,
+        backgroundColor: Colors.pink[100],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(40)),
+        ),
         title: Text(
-          "Recipes",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+          "Cart",
+
         ),
         centerTitle: true,
       ),
@@ -54,8 +59,10 @@ class _HomepageState extends State<Homepage> {
           itemBuilder: (context, index) {
             var rec = controller.recipelist[index];
             return Card(
+              color: Colors.pink[50],
               child: ListTile(
                 leading: CircleAvatar(
+                  radius: 30,
                   backgroundImage: FileImage(File(rec["image"]!)),
                 ),
                 title: Text("${rec["name"]}"),
@@ -67,7 +74,7 @@ class _HomepageState extends State<Homepage> {
                   TextOverflow.ellipsis, // Add ellipsis if text overflows
                 ),
                 trailing: IconButton(onPressed: () async{
-                  _deleteProduct(rec["id"]!);
+                  controller.recipelist.removeAt(index);
                 }, icon: Icon(Icons.delete))
 
               ),
@@ -78,30 +85,5 @@ class _HomepageState extends State<Homepage> {
 
     );
   }
-  Future<void> _deleteProduct(String productId) async {
-    try {
-      // Reference to the Firestore collection
-      var collection = FirebaseFirestore.instance.collection("User");
 
-      // Delete the product document using its ID
-      await collection.doc(productId).delete();
-
-      // Update the UI by fetching recipes again
-      controller.fetchrecipe();
-
-      // Show a success message using GetX snackbar
-      Get.snackbar(
-        'Success',
-        'Product deleted successfully',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } catch (e) {
-      // Show an error message using GetX snackbar if deletion fails
-      Get.snackbar(
-        'Error',
-        'Failed to delete product',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
 }

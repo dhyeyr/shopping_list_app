@@ -62,10 +62,5 @@ class HomeController extends GetxController {
     );
     recipelist.refresh();
   }
-  Future<void> removeFromFavorites(String quote) async {
-    DbHelper dbHelper = DbHelper();
-    await dbHelper.initDb();
-    await dbHelper.deleteData(quote);
-    await fetchrecipe();
-  }
+
 }

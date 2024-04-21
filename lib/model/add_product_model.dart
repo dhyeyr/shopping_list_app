@@ -22,16 +22,16 @@ class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
-    name: json["name"],
-    image: json["image"],
-    description: json["description"],
-    price: json["price"],
-  );
+        name: json["name"],
+        image: json["image"],
+        description: json["description"],
+        price: json["price"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "image": image,
-    "description": description,
-    "price": price,
-  };
+        "name": name,
+        "image": image,
+        "description": description,
+        "price": price,
+      };
 }
