@@ -1,5 +1,5 @@
 # Shopping List App
-- Hii This is Dipak Thakur the Flutter Developer !!!..
+- Hii This is Dhyey Rabadiya the Flutter Developer !!!..
 # Project Technologies
 - Flutter Firebase for online backend service &
 - Flutter Sqlflite for offline backend serivce using Getx State managment.
